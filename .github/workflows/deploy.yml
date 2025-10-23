@@ -30,8 +30,16 @@ jobs:
         node-version: '18'
         cache: 'npm'
 
+    - name: Debug environment
+      run: |
+        node --version
+        npm --version
+        ls -la
+
     - name: Install dependencies
-      run: npm ci
+      run: |
+        npm ci
+        npm list
 
     - name: Build project
       run: npm run build

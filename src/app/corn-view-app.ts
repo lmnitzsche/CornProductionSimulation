@@ -23,6 +23,7 @@ export class CornViewApplication {
   private educationalContent!: EducationalContent;
   // private cornField3D: CornField3D | null = null;
   private animationId: number | null = null;
+  private simulationData: Array<{day: number, gdu: number, stage: string, yield: number}> = [];
 
   constructor() {
     this.app = document.getElementById('app')!;
@@ -195,14 +196,9 @@ export class CornViewApplication {
             </div>
 
             <div class="visualization-container">
-              <div class="field-visualization">
+              <div class="field-visualization-expanded">
                 <h3>Corn Field Visualization</h3>
-                <div id="corn-field-3d"></div>
-              </div>
-              
-              <div class="growth-chart">
-                <h3>Growth Progress</h3>
-                <canvas id="growth-chart" width="400" height="300"></canvas>
+                <div id="corn-field-display"></div>
               </div>
             </div>
 
@@ -233,30 +229,100 @@ export class CornViewApplication {
             </div>
           </section>
 
-          <!-- Step 4: Analysis & Results -->
+          <!-- Step 4: Economic Analysis -->
           <section class="step-section" id="analysis-results">
             <div class="step-header">
-              <h2><span class="step-number">4</span> Analysis & Results</h2>
-              <p>Detailed analysis of simulation results and recommendations</p>
+              <h2><span class="step-number">4</span> Economic Analysis</h2>
+              <p>Comprehensive financial analysis and profitability assessment</p>
             </div>
             
-            <div class="results-grid">
-              <div class="result-card">
-                <h3>📊 Yield Analysis</h3>
-                <canvas id="yield-chart" width="300" height="200"></canvas>
+            <div class="economic-grid">
+              <div class="economic-card">
+                <h3>� Revenue Analysis</h3>
+                <div class="economic-details">
+                  <div class="metric-row">
+                    <span class="metric-label">Predicted Yield:</span>
+                    <span class="metric-value" id="final-yield">-- bu/acre</span>
+                  </div>
+                  <div class="metric-row">
+                    <span class="metric-label">Corn Price ($/bu):</span>
+                    <span class="metric-value" id="corn-price">$4.50</span>
+                  </div>
+                  <div class="metric-row total">
+                    <span class="metric-label">Gross Revenue:</span>
+                    <span class="metric-value" id="gross-revenue">$--</span>
+                  </div>
+                </div>
               </div>
               
-              <div class="result-card">
-                <h3>🌡️ GDU Accumulation</h3>
-                <canvas id="gdu-accumulation-chart" width="300" height="200"></canvas>
+              <div class="economic-card">
+                <h3>💸 Cost Breakdown</h3>
+                <div class="economic-details">
+                  <div class="metric-row">
+                    <span class="metric-label">Seed Costs:</span>
+                    <span class="metric-value" id="seed-costs">$120</span>
+                  </div>
+                  <div class="metric-row">
+                    <span class="metric-label">Fertilizer:</span>
+                    <span class="metric-value" id="fertilizer-costs">$280</span>
+                  </div>
+                  <div class="metric-row">
+                    <span class="metric-label">Pesticides:</span>
+                    <span class="metric-value" id="pesticide-costs">$85</span>
+                  </div>
+                  <div class="metric-row">
+                    <span class="metric-label">Fuel & Equipment:</span>
+                    <span class="metric-value" id="equipment-costs">$165</span>
+                  </div>
+                  <div class="metric-row total">
+                    <span class="metric-label">Total Costs:</span>
+                    <span class="metric-value" id="total-costs">$650</span>
+                  </div>
+                </div>
               </div>
               
-              <div class="result-card">
-                <h3>💰 Economic Analysis</h3>
-                <div id="economic-summary">
-                  <p>Revenue: <span id="gross-revenue">$--</span></p>
-                  <p>Costs: <span id="total-costs">$--</span></p>
-                  <p>Net Income: <span id="net-income">$--</span></p>
+              <div class="economic-card">
+                <h3>📈 Profitability Analysis</h3>
+                <div class="economic-details">
+                  <div class="metric-row profit">
+                    <span class="metric-label">Net Income/Acre:</span>
+                    <span class="metric-value" id="net-income">$--</span>
+                  </div>
+                  <div class="metric-row">
+                    <span class="metric-label">Profit Margin:</span>
+                    <span class="metric-value" id="profit-margin">--%</span>
+                  </div>
+                  <div class="metric-row">
+                    <span class="metric-label">Break-even Yield:</span>
+                    <span class="metric-value" id="breakeven-yield">144.4 bu/acre</span>
+                  </div>
+                  <div class="metric-row">
+                    <span class="metric-label">ROI:</span>
+                    <span class="metric-value" id="roi-percentage">--%</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="economic-card full-width">
+                <h3>🏛️ Market Conditions & Risk Assessment</h3>
+                <div class="economic-details">
+                  <div class="risk-grid">
+                    <div class="risk-factor">
+                      <h4>Price Risk</h4>
+                      <p>Current corn futures: <span id="futures-price">$4.50/bu</span></p>
+                      <p>5-year avg: <span class="historical">$4.25/bu</span></p>
+                    </div>
+                    <div class="risk-factor">
+                      <h4>Yield Risk</h4>
+                      <p>County avg: <span id="county-avg-yield">185 bu/acre</span></p>
+                      <p>Your predicted: <span id="comparison-yield">-- bu/acre</span></p>
+                    </div>
+                    <div class="risk-factor">
+                      <h4>Cost Risk</h4>
+                      <p>Input inflation: <span class="inflation">+3.2% annually</span></p>
+                      <p>Fuel volatility: <span class="volatility">High</span></p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -297,15 +363,226 @@ export class CornViewApplication {
     const educationalContainer = document.getElementById('educational-content')!;
     this.educationalContent = new EducationalContent(educationalContainer);
 
-    // Initialize 3D field (commented out for now to avoid Three.js import issues)
-    // const fieldContainer = document.getElementById('corn-field-3d')!;
-    // this.cornField3D = new CornField3D(fieldContainer);
+    // Initialize corn field visualization
+    this.initializeCornField();
     
-    // Prevent unused variable warnings
+    // Initialize charts
+    this.initializeCharts();
+    
     console.log('Components initialized:', {
       countyMap: !!this.countyMap,
-      educationalContent: !!this.educationalContent
+      educationalContent: !!this.educationalContent,
+      chartsInitialized: true
     });
+  }
+
+  private initializeCornField(): void {
+    const fieldContainer = document.getElementById('corn-field-display');
+    if (!fieldContainer) return;
+
+    // Create a realistic corn field visualization
+    fieldContainer.innerHTML = `
+      <div class="realistic-corn-field">
+        <div class="field-rows" id="field-rows">
+          ${this.generateCornRows()}
+        </div>
+        <div class="field-stats">
+          <div class="stat-row">
+            <span>Growth Stage: <strong id="field-growth-stage">Pre-Emergence</strong></span>
+            <span>Plant Height: <strong id="plant-height">0"</strong></span>
+          </div>
+          <div class="stat-row">
+            <span>Population: <strong id="field-population">34,000</strong> plants/acre</span>
+            <span>Days Since Planting: <strong id="days-planted">0</strong></span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  private generateCornRows(): string {
+    let rows = '';
+    for (let row = 0; row < 12; row++) {
+      rows += '<div class="corn-row">';
+      for (let plant = 0; plant < 20; plant++) {
+        const plantId = `plant-${row}-${plant}`;
+        rows += `<div class="corn-stalk" id="${plantId}" data-row="${row}" data-plant="${plant}">
+          <div class="stalk-base"></div>
+          <div class="stalk-middle"></div>
+          <div class="stalk-top"></div>
+          <div class="corn-leaves"></div>
+          <div class="corn-ear"></div>
+        </div>`;
+      }
+      rows += '</div>';
+    }
+    return rows;
+  }
+
+  private initializeCharts(): void {
+    this.updateEconomicAnalysis();
+  }
+
+  private updateEconomicAnalysis(): void {
+    if (!this.state.selectedCounty) return;
+
+    // Calculate current yield
+    const currentYield = this.gduCalculator.calculatePotentialYield(
+      this.state.selectedCounty,
+      this.state.totalGDU,
+      this.state.yieldFactors
+    );
+
+    // Economic parameters
+    const cornPrice = 4.50; // $/bushel
+    const seedCosts = 120; // $/acre
+    const fertilizerCosts = 280; // $/acre
+    const pesticideCosts = 85; // $/acre
+    const equipmentCosts = 165; // $/acre
+    const totalCosts = seedCosts + fertilizerCosts + pesticideCosts + equipmentCosts;
+
+    // Calculate financials
+    const grossRevenue = currentYield * cornPrice;
+    const netIncome = grossRevenue - totalCosts;
+    const profitMargin = grossRevenue > 0 ? (netIncome / grossRevenue) * 100 : 0;
+    const breakevenYield = totalCosts / cornPrice;
+    const roi = totalCosts > 0 ? (netIncome / totalCosts) * 100 : 0;
+
+    // Update UI elements
+    this.updateEconomicDisplay({
+      finalYield: currentYield,
+      cornPrice: cornPrice,
+      seedCosts: seedCosts,
+      fertilizerCosts: fertilizerCosts,
+      pesticideCosts: pesticideCosts,
+      equipmentCosts: equipmentCosts,
+      grossRevenue: grossRevenue,
+      totalCosts: totalCosts,
+      netIncome: netIncome,
+      profitMargin: profitMargin,
+      breakevenYield: breakevenYield,
+      roi: roi,
+      countyAvgYield: this.state.selectedCounty.production.averageYield
+    });
+  }
+
+  private updateEconomicDisplay(economics: {
+    finalYield: number;
+    cornPrice: number;
+    seedCosts: number;
+    fertilizerCosts: number;
+    pesticideCosts: number;
+    equipmentCosts: number;
+    grossRevenue: number;
+    totalCosts: number;
+    netIncome: number;
+    profitMargin: number;
+    breakevenYield: number;
+    roi: number;
+    countyAvgYield: number;
+  }): void {
+    // Revenue section
+    const finalYieldEl = document.getElementById('final-yield');
+    const cornPriceEl = document.getElementById('corn-price');
+    const grossRevenueEl = document.getElementById('gross-revenue');
+
+    if (finalYieldEl) finalYieldEl.textContent = `${economics.finalYield.toFixed(1)} bu/acre`;
+    if (cornPriceEl) cornPriceEl.textContent = `$${economics.cornPrice.toFixed(2)}`;
+    if (grossRevenueEl) grossRevenueEl.textContent = `$${economics.grossRevenue.toFixed(2)}`;
+
+    // Cost section
+    const seedCostsEl = document.getElementById('seed-costs');
+    const fertilizerCostsEl = document.getElementById('fertilizer-costs');
+    const pesticideCostsEl = document.getElementById('pesticide-costs');
+    const equipmentCostsEl = document.getElementById('equipment-costs');
+    const totalCostsEl = document.getElementById('total-costs');
+
+    if (seedCostsEl) seedCostsEl.textContent = `$${economics.seedCosts}`;
+    if (fertilizerCostsEl) fertilizerCostsEl.textContent = `$${economics.fertilizerCosts}`;
+    if (pesticideCostsEl) pesticideCostsEl.textContent = `$${economics.pesticideCosts}`;
+    if (equipmentCostsEl) equipmentCostsEl.textContent = `$${economics.equipmentCosts}`;
+    if (totalCostsEl) totalCostsEl.textContent = `$${economics.totalCosts}`;
+
+    // Profitability section
+    const netIncomeEl = document.getElementById('net-income');
+    const profitMarginEl = document.getElementById('profit-margin');
+    const breakevenYieldEl = document.getElementById('breakeven-yield');
+    const roiEl = document.getElementById('roi-percentage');
+
+    if (netIncomeEl) {
+      netIncomeEl.textContent = `$${economics.netIncome.toFixed(2)}`;
+      netIncomeEl.style.color = economics.netIncome >= 0 ? '#28a745' : '#dc3545';
+    }
+    if (profitMarginEl) {
+      profitMarginEl.textContent = `${economics.profitMargin.toFixed(1)}%`;
+      profitMarginEl.style.color = economics.profitMargin >= 0 ? '#28a745' : '#dc3545';
+    }
+    if (breakevenYieldEl) breakevenYieldEl.textContent = `${economics.breakevenYield.toFixed(1)} bu/acre`;
+    if (roiEl) {
+      roiEl.textContent = `${economics.roi.toFixed(1)}%`;
+      roiEl.style.color = economics.roi >= 0 ? '#28a745' : '#dc3545';
+    }
+
+    // Market conditions section
+    const countyAvgYieldEl = document.getElementById('county-avg-yield');
+    const comparisonYieldEl = document.getElementById('comparison-yield');
+    const futuresPriceEl = document.getElementById('futures-price');
+
+    if (countyAvgYieldEl) countyAvgYieldEl.textContent = `${economics.countyAvgYield} bu/acre`;
+    if (comparisonYieldEl) {
+      comparisonYieldEl.textContent = `${economics.finalYield.toFixed(1)} bu/acre`;
+      comparisonYieldEl.style.color = economics.finalYield >= economics.countyAvgYield ? '#28a745' : '#ffc107';
+    }
+    if (futuresPriceEl) futuresPriceEl.textContent = `$${economics.cornPrice.toFixed(2)}/bu`;
+  }
+
+  private updateCornField(): void {
+    const fieldGrowthStage = document.getElementById('field-growth-stage');
+    const plantHeight = document.getElementById('plant-height');
+    const fieldPopulation = document.getElementById('field-population');
+    const daysPlanted = document.getElementById('days-planted');
+    
+    if (this.state.selectedCounty && fieldGrowthStage) {
+      const currentStage = this.gduCalculator.getCurrentGrowthStage(this.state.totalGDU);
+      fieldGrowthStage.textContent = currentStage?.stage || 'Pre-Emergence';
+    }
+    
+    if (plantHeight) {
+      // Estimate plant height based on GDU
+      const estimatedHeight = Math.min(Math.floor(this.state.totalGDU / 30), 120);
+      plantHeight.textContent = `${estimatedHeight}"`;
+    }
+    
+    if (fieldPopulation) {
+      fieldPopulation.textContent = this.state.yieldFactors.plantPopulation.toLocaleString();
+    }
+    
+    if (daysPlanted) {
+      daysPlanted.textContent = (this.state.currentDay - 1).toString();
+    }
+
+    // Update visual corn stalks based on growth stage
+    const stalks = document.querySelectorAll('.corn-stalk');
+    const growthPercent = Math.min(this.state.totalGDU / 2700, 1); // 2700 is maturity
+    
+    stalks.forEach((stalk, index) => {
+      const element = stalk as HTMLElement;
+      const delay = (index % 240) * 0.005; // Reduced delay for all 240 plants
+      
+      // Reset ALL stalks when totalGDU is 0, otherwise use normal growth logic
+      if (this.state.totalGDU === 0) {
+        element.style.setProperty('--growth-progress', '0');
+        element.classList.remove('growing');
+      } else if (growthPercent > delay) {
+        const adjustedGrowth = Math.min((growthPercent - delay) * 2, 1);
+        element.style.setProperty('--growth-progress', adjustedGrowth.toString());
+        element.classList.add('growing');
+      }
+    });
+  }
+
+  private updateCharts(): void {
+    this.updateEconomicAnalysis();
   }
 
   private setupEventListeners(): void {
@@ -449,7 +726,10 @@ export class CornViewApplication {
     this.state.currentDay = 1;
     this.calculateInitialGDU();
     this.state.currentGrowthStage = 0;
+    this.simulationData = []; // Clear simulation data
     this.updateDisplay();
+    this.updateCornField();
+    this.updateCharts();
   }
 
   private runSimulationLoop(): void {
@@ -494,6 +774,20 @@ export class CornViewApplication {
     // Increment day
     this.state.currentDay++;
 
+    // Collect simulation data for charts
+    const currentYield = this.gduCalculator.calculatePotentialYield(
+      this.state.selectedCounty,
+      this.state.totalGDU,
+      this.state.yieldFactors
+    );
+
+    this.simulationData.push({
+      day: this.state.currentDay,
+      gdu: this.state.totalGDU,
+      stage: currentStage?.stage || 'Pre-Emergence',
+      yield: currentYield
+    });
+
     // Update displays
     this.updateDisplay();
     
@@ -506,6 +800,10 @@ export class CornViewApplication {
     if (dailyGduElement) {
       dailyGduElement.textContent = Math.round(dailyGDU).toString();
     }
+
+    // Update visualizations
+    this.updateCornField();
+    this.updateCharts();
 
     // Stop at maturity
     if (this.state.totalGDU >= 2700) {

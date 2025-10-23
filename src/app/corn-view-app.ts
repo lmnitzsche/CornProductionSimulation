@@ -62,7 +62,7 @@ export class CornViewApplication {
         <header class="app-header">
           <div class="header-content">
             <div class="logo-section">
-              <h1>🌽 CornView Illinois</h1>
+              <h1>CornView Illinois</h1>
               <p>Professional Corn Production Simulation & Analysis</p>
             </div>
             <div class="header-stats">
@@ -106,7 +106,7 @@ export class CornViewApplication {
             
             <div class="config-grid">
               <div class="config-panel">
-                <h3>🌱 Planting Conditions</h3>
+                <h3>Planting Conditions</h3>
                 <div class="form-group">
                   <label for="planting-date">Planting Date:</label>
                   <input type="date" id="planting-date" value="${this.formatDate(this.state.plantingDate)}">
@@ -128,7 +128,7 @@ export class CornViewApplication {
               </div>
 
               <div class="config-panel">
-                <h3>🧪 Nutrient Management</h3>
+                <h3>Nutrient Management</h3>
                 <div class="form-group">
                   <label for="nitrogen-rate">Nitrogen Rate (lbs/acre):</label>
                   <input type="range" id="nitrogen-rate" min="120" max="220" value="180" step="10">
@@ -147,7 +147,7 @@ export class CornViewApplication {
               </div>
 
               <div class="config-panel">
-                <h3>🌧️ Environmental Conditions</h3>
+                <h3>Environmental Conditions</h3>
                 <div class="form-group">
                   <label for="soil-moisture">Soil Moisture Level:</label>
                   <select id="soil-moisture">
@@ -160,17 +160,19 @@ export class CornViewApplication {
                 <div class="form-group">
                   <label for="disease-pressure">Disease Pressure:</label>
                   <select id="disease-pressure">
-                    <option value="0.05" selected>Low</option>
-                    <option value="0.15">Moderate</option>
-                    <option value="0.3">High</option>
+                    <option value="none" selected>None</option>
+                    <option value="low">Low</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="high">High</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="pest-pressure">Insect Pressure:</label>
-                  <select id="pest-pressure">
-                    <option value="0.05" selected>Low</option>
-                    <option value="0.1">Moderate</option>
-                    <option value="0.25">High</option>
+                  <label for="insect-pressure">Insect Pressure:</label>
+                  <select id="insect-pressure">
+                    <option value="none" selected>None</option>
+                    <option value="low">Low</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="high">High</option>
                   </select>
                 </div>
               </div>
@@ -238,7 +240,7 @@ export class CornViewApplication {
             
             <div class="economic-grid">
               <div class="economic-card">
-                <h3>� Revenue Analysis</h3>
+                <h3>Revenue Analysis</h3>
                 <div class="economic-details">
                   <div class="metric-row">
                     <span class="metric-label">Predicted Yield:</span>
@@ -256,7 +258,7 @@ export class CornViewApplication {
               </div>
               
               <div class="economic-card">
-                <h3>💸 Cost Breakdown</h3>
+                <h3>Cost Breakdown</h3>
                 <div class="economic-details">
                   <div class="metric-row">
                     <span class="metric-label">Seed Costs:</span>
@@ -282,7 +284,7 @@ export class CornViewApplication {
               </div>
               
               <div class="economic-card">
-                <h3>📈 Profitability Analysis</h3>
+                <h3>Profitability Analysis</h3>
                 <div class="economic-details">
                   <div class="metric-row profit">
                     <span class="metric-label">Net Income/Acre:</span>
@@ -304,7 +306,7 @@ export class CornViewApplication {
               </div>
               
               <div class="economic-card full-width">
-                <h3>🏛️ Market Conditions & Risk Assessment</h3>
+                <h3>Market Conditions & Risk Assessment</h3>
                 <div class="economic-details">
                   <div class="risk-grid">
                     <div class="risk-factor">
@@ -331,7 +333,7 @@ export class CornViewApplication {
           <!-- Educational Content -->
           <section class="step-section" id="educational-section">
             <div class="step-header">
-              <h2><span class="step-number">📚</span> Learn More</h2>
+              <h2><span class="step-number">5</span> Learn More</h2>
               <p>Understand the science behind corn production and yield prediction</p>
             </div>
             <div id="educational-content"></div>
@@ -342,6 +344,7 @@ export class CornViewApplication {
         <footer class="app-footer">
           <div class="footer-content">
             <p>Created by <a href="https://logannitzsche.com" target="_blank">Logan Nitzsche</a> in association with <strong>Southern Illinois University Edwardsville</strong></p>
+            <p>Academic Advisor: <strong>Dr. Rubi Quinones</strong></p>
             <p>Data sources: University of Illinois Extension, USDA-NASS, Illinois Corn Growers Association</p>
           </div>
         </footer>

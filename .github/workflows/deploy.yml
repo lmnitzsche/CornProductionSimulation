@@ -30,16 +30,8 @@ jobs:
         node-version: '18'
         cache: 'npm'
 
-    - name: Debug environment
-      run: |
-        node --version
-        npm --version
-        ls -la
-
     - name: Install dependencies
-      run: |
-        npm ci
-        npm list
+      run: npm ci
 
     - name: Build project
       run: npm run build
@@ -50,7 +42,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        path: './dist'
+        path: 'dist'
 
   deploy:
     environment:

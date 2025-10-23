@@ -2,16 +2,16 @@
   "root": true,
   "env": { "browser": true, "es2020": true },
   "extends": [
-    "eslint:recommended",
-    "@typescript-eslint/recommended"
+    "eslint:recommended"
   ],
-  "ignorePatterns": ["dist", ".eslintrc.cjs"],
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "ignorePatterns": ["dist", "node_modules"],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
   "rules": {
-    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-    "@typescript-eslint/no-explicit-any": "warn",
     "prefer-const": "error",
-    "no-var": "error"
+    "no-var": "error",
+    "no-unused-vars": "warn"
   }
 }

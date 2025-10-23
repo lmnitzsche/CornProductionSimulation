@@ -405,7 +405,16 @@ export class CornViewApplication {
   }
 
   private startSimulation(): void {
-    if (!this.state.selectedCounty) return;
+    console.log('Start simulation called', {
+      hasSelectedCounty: !!this.state.selectedCounty,
+      currentDay: this.state.currentDay,
+      totalGDU: this.state.totalGDU
+    });
+    
+    if (!this.state.selectedCounty) {
+      console.warn('No county selected for simulation');
+      return;
+    }
 
     this.state.isRunning = true;
     
@@ -413,8 +422,8 @@ export class CornViewApplication {
     const playBtn = document.getElementById('play-simulation') as HTMLButtonElement;
     const pauseBtn = document.getElementById('pause-simulation') as HTMLButtonElement;
     
-    playBtn.disabled = true;
-    pauseBtn.disabled = false;
+    if (playBtn) playBtn.disabled = true;
+    if (pauseBtn) pauseBtn.disabled = false;
     
     this.runSimulationLoop();
   }
@@ -444,7 +453,13 @@ export class CornViewApplication {
   }
 
   private runSimulationLoop(): void {
-    if (!this.state.isRunning || !this.state.selectedCounty) return;
+    if (!this.state.isRunning || !this.state.selectedCounty) {
+      console.log('Simulation loop stopped', {
+        isRunning: this.state.isRunning,
+        hasCounty: !!this.state.selectedCounty
+      });
+      return;
+    }
 
     // Simulate a day
     this.simulateDay();
@@ -452,7 +467,9 @@ export class CornViewApplication {
     // Schedule next iteration
     const delay = Math.max(100, 1000 / this.state.speed);
     setTimeout(() => {
-      this.animationId = requestAnimationFrame(() => this.runSimulationLoop());
+      if (this.state.isRunning) {
+        this.animationId = requestAnimationFrame(() => this.runSimulationLoop());
+      }
     }, delay);
   }
 
@@ -479,8 +496,16 @@ export class CornViewApplication {
 
     // Update displays
     this.updateDisplay();
-    document.getElementById('current-temp')!.textContent = `${Math.round(maxTemp)}°F`;
-    document.getElementById('daily-gdu')!.textContent = Math.round(dailyGDU).toString();
+    
+    const currentTempElement = document.getElementById('current-temp');
+    const dailyGduElement = document.getElementById('daily-gdu');
+    
+    if (currentTempElement) {
+      currentTempElement.textContent = `${Math.round(maxTemp)}°F`;
+    }
+    if (dailyGduElement) {
+      dailyGduElement.textContent = Math.round(dailyGDU).toString();
+    }
 
     // Stop at maturity
     if (this.state.totalGDU >= 2700) {
@@ -497,21 +522,34 @@ export class CornViewApplication {
       this.state.yieldFactors
     );
 
-    document.getElementById('current-yield')!.textContent = `${currentYield} bu/acre`;
-    document.getElementById('potential-yield')!.textContent = `${this.state.selectedCounty.production.averageYield} bu/acre`;
+    const currentYieldElement = document.getElementById('current-yield');
+    const potentialYieldElement = document.getElementById('potential-yield');
+    
+    if (currentYieldElement) {
+      currentYieldElement.textContent = `${currentYield} bu/acre`;
+    }
+    if (potentialYieldElement) {
+      potentialYieldElement.textContent = `${this.state.selectedCounty.production.averageYield} bu/acre`;
+    }
   }
 
   private updateDisplay(): void {
     // Update header stats
-    document.getElementById('current-day')!.textContent = this.state.currentDay.toString();
-    document.getElementById('total-gdu')!.textContent = Math.round(this.state.totalGDU).toString();
+    const totalGduElement = document.getElementById('total-gdu');
+    if (totalGduElement) {
+      totalGduElement.textContent = Math.round(this.state.totalGDU).toString();
+    }
 
     // Update growth stage
     const currentStage = this.gduCalculator.getCurrentGrowthStage(this.state.totalGDU);
     if (currentStage) {
-      document.getElementById('growth-stage')!.textContent = currentStage.stage;
-      document.getElementById('stage-name')!.textContent = currentStage.stage;
-      document.getElementById('stage-description')!.textContent = currentStage.description;
+      const growthStageElement = document.getElementById('growth-stage');
+      const stageNameElement = document.getElementById('stage-name');
+      const stageDescElement = document.getElementById('stage-description');
+      
+      if (growthStageElement) growthStageElement.textContent = currentStage.stage;
+      if (stageNameElement) stageNameElement.textContent = currentStage.stage;
+      if (stageDescElement) stageDescElement.textContent = currentStage.description;
     }
 
     // Update yield prediction
@@ -521,7 +559,10 @@ export class CornViewApplication {
         this.state.totalGDU,
         this.state.yieldFactors
       );
-      document.getElementById('predicted-yield')!.textContent = `${predictedYield} bu/acre`;
+      const predictedYieldElement = document.getElementById('predicted-yield');
+      if (predictedYieldElement) {
+        predictedYieldElement.textContent = `${predictedYield} bu/acre`;
+      }
     }
 
     this.updateSimulation();

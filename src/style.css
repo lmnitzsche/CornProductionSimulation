@@ -282,9 +282,10 @@ body {
 }
 
 .county-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
 }
 
 .county-card {
@@ -881,9 +882,18 @@ body {
   .factor-grid {
     grid-template-columns: 1fr;
   }
+  
+  .county-cards {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
+  .county-cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
   .logo-section h1 {
     font-size: 1.5rem;
   }

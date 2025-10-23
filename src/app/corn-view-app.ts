@@ -41,14 +41,14 @@ export class CornViewApplication {
       currentGrowthStage: 0,
       plantingDate: new Date(currentYear, 4, 10), // May 10th
       yieldFactors: {
-        soilMoisture: 0.8,
+        soilMoisture: 1.0, // Optimal moisture conditions
         nitrogen: 180,
         phosphorus: 40,
         potassium: 160,
         plantPopulation: 34000,
-        diseasePress: 0.1,
-        insectPress: 0.05,
-        weedPress: 0.1
+        diseasePress: 0.0, // No disease pressure
+        insectPress: 0.0,  // No insect pressure
+        weedPress: 0.0     // No weed pressure
       },
       isRunning: false,
       speed: 1
@@ -600,6 +600,9 @@ export class CornViewApplication {
 
     // Range input updates
     this.setupRangeInputs();
+    
+    // Environmental control listeners
+    this.setupEnvironmentalControls();
   }
 
   private setupRangeInputs(): void {
@@ -643,6 +646,88 @@ export class CornViewApplication {
         });
       }
     });
+  }
+
+  private setupEnvironmentalControls(): void {
+    // Soil moisture control
+    const soilMoistureSelect = document.getElementById('soil-moisture') as HTMLSelectElement;
+    if (soilMoistureSelect) {
+      soilMoistureSelect.addEventListener('change', () => {
+        const value = soilMoistureSelect.value;
+        switch (value) {
+          case 'drought':
+            this.state.yieldFactors.soilMoisture = 0.3;
+            break;
+          case 'dry':
+            this.state.yieldFactors.soilMoisture = 0.6;
+            break;
+          case 'adequate':
+            this.state.yieldFactors.soilMoisture = 0.8;
+            break;
+          case 'optimal':
+            this.state.yieldFactors.soilMoisture = 1.0;
+            break;
+          default:
+            this.state.yieldFactors.soilMoisture = 0.8;
+        }
+        this.updateSimulation();
+      });
+    }
+
+    // Disease pressure control
+    const diseasePressureSelect = document.getElementById('disease-pressure') as HTMLSelectElement;
+    if (diseasePressureSelect) {
+      diseasePressureSelect.addEventListener('change', () => {
+        const value = diseasePressureSelect.value;
+        switch (value) {
+          case 'none':
+            this.state.yieldFactors.diseasePress = 0.0;
+            break;
+          case 'low':
+            this.state.yieldFactors.diseasePress = 0.05;
+            break;
+          case 'moderate':
+            this.state.yieldFactors.diseasePress = 0.15;
+            break;
+          case 'high':
+            this.state.yieldFactors.diseasePress = 0.3;
+            break;
+          default:
+            this.state.yieldFactors.diseasePress = 0.0;
+        }
+        this.updateSimulation();
+      });
+    }
+
+    // Insect pressure control
+    const insectPressureSelect = document.getElementById('insect-pressure') as HTMLSelectElement;
+    if (insectPressureSelect) {
+      insectPressureSelect.addEventListener('change', () => {
+        const value = insectPressureSelect.value;
+        switch (value) {
+          case 'none':
+            this.state.yieldFactors.insectPress = 0.0;
+            break;
+          case 'low':
+            this.state.yieldFactors.insectPress = 0.03;
+            break;
+          case 'moderate':
+            this.state.yieldFactors.insectPress = 0.1;
+            break;
+          case 'high':
+            this.state.yieldFactors.insectPress = 0.25;
+            break;
+          default:
+            this.state.yieldFactors.insectPress = 0.0;
+        }
+        this.updateSimulation();
+      });
+    }
+
+    // Set initial values to optimal
+    if (soilMoistureSelect) soilMoistureSelect.value = 'optimal';
+    if (diseasePressureSelect) diseasePressureSelect.value = 'none';
+    if (insectPressureSelect) insectPressureSelect.value = 'none';
   }
 
   private selectCounty(county: CountyData): void {
@@ -724,9 +809,22 @@ export class CornViewApplication {
   private resetSimulation(): void {
     this.pauseSimulation();
     this.state.currentDay = 1;
-    this.calculateInitialGDU();
+    this.state.totalGDU = 0; // Reset GDU to 0 instead of calculating initial value
     this.state.currentGrowthStage = 0;
     this.simulationData = []; // Clear simulation data
+    
+    // Reset yield factors to optimal conditions
+    this.state.yieldFactors = {
+      soilMoisture: 1.0, // Optimal moisture
+      nitrogen: 180,
+      phosphorus: 40,
+      potassium: 160,
+      plantPopulation: 34000,
+      diseasePress: 0.0, // No stress
+      insectPress: 0.0,
+      weedPress: 0.0
+    };
+    
     this.updateDisplay();
     this.updateCornField();
     this.updateCharts();

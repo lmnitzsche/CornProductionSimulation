@@ -1,10 +1,8 @@
 # CornView: Modern Corn Growth Monitoring and Yield Projection Simulation
 
-![CornView Screenshot](images/urca.jpg)
-
 A modern web application built with **TypeScript** and **JavaScript** for simulating corn growth based on Growing Degree Units (GDU) and environmental factors.
 
-## 🚀 Modern Tech Stack
+## Modern Tech Stack
 
 - **TypeScript** - Type-safe development with modern ES2020+ features
 - **JavaScript** - Compiled output for browser compatibility
@@ -14,7 +12,7 @@ A modern web application built with **TypeScript** and **JavaScript** for simula
 - **ESLint & Prettier** - Code quality and formatting tools
 - **GitHub Actions** - Automated deployment to GitHub Pages
 
-## 🌽 Features
+## Features
 
 - **Interactive Simulation**: Real-time corn growth visualization based on scientific GDU calculations
 - **Environmental Factors**: Configurable soil texture, seed zones, seeding depth, and planting dates
@@ -25,7 +23,7 @@ A modern web application built with **TypeScript** and **JavaScript** for simula
 - **Responsive Design**: Mobile-friendly interface with modern CSS
 - **Real-time Controls**: Play, pause, speed control for simulation
 
-## 🛠️ Development
+## Development
 
 ### Prerequisites
 - Node.js 18+
@@ -71,7 +69,7 @@ public/
     └── deploy.yml    # GitHub Pages deployment
 ```
 
-## 📊 Scientific Background
+## Scientific Background
 
 The simulation uses Growing Degree Units (GDU) to model corn development:
 - **Base Temperature**: 50°F (10°C)
@@ -84,16 +82,16 @@ Environmental factors affecting growth:
 - Seeding depth
 - Planting date timing
 
-## 🚀 Deployment
+## Deployment
 
 The application automatically deploys to GitHub Pages via GitHub Actions when pushed to the main branch.
 
-**Live Demo**: [https://lmnitzsche.github.io/CornView/](https://lmnitzsche.github.io/CornView/)
+**Live Demo**: [https://logannitzsche.com/CornProductionSimulation/](https://logannitzsche.com/CornProductionSimulation/)
 
-## 📝 License
+## License
 
 MIT License - see [LICENSE](text/LICENSE) file for details.
 
-## 👨‍💻 Author
+## Author
 
 Created by [Logan Nitzsche](https://logannitzsche.com)

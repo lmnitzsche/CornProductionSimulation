@@ -10,7 +10,7 @@ export class EducationalContent {
     this.container.innerHTML = `
       <div class="education-panel">
         <div class="education-header">
-          <h2>🌽 Learn About Corn Production</h2>
+          <h2>Learn About Corn Production</h2>
           <p>Understanding the science behind corn growth and yield prediction</p>
         </div>
 
@@ -38,7 +38,7 @@ export class EducationalContent {
   private createGDUContent(): string {
     return `
       <div class="tab-content active" id="gdu-content">
-        <h3>Growing Degree Units (GDU) 🌡️</h3>
+        <h3>Growing Degree Units (GDU)</h3>
         
         <div class="content-section">
           <h4>What are Growing Degree Units?</h4>
@@ -66,11 +66,6 @@ export class EducationalContent {
             <li><strong>Risk Assessment:</strong> Helps predict if corn will mature before first frost</li>
           </ul>
         </div>
-
-        <div class="gdu-chart">
-          <h4>Typical Illinois GDU Accumulation</h4>
-          <canvas id="gdu-chart" width="400" height="200"></canvas>
-        </div>
       </div>
     `;
   }
@@ -78,7 +73,7 @@ export class EducationalContent {
   private createGrowthStagesContent(): string {
     return `
       <div class="tab-content" id="growth-content">
-        <h3>Corn Growth Stages 🌱</h3>
+        <h3>Corn Growth Stages</h3>
         
         <div class="growth-stages-grid">
           <div class="stage-card">
@@ -141,11 +136,11 @@ export class EducationalContent {
         <div class="critical-periods">
           <h4>Critical Growth Periods</h4>
           <div class="critical-period">
-            <h5>🔴 VT to R2 (Tasseling to Blister)</h5>
+            <h5>VT to R2 (Tasseling to Blister)</h5>
             <p>Most critical period for yield determination. Moisture stress during this 2-3 week period can reduce yields by 3-7% per day of stress.</p>
           </div>
           <div class="critical-period">
-            <h5>🟡 V6 to V10 (6th to 10th Leaf)</h5>
+            <h5>V6 to V10 (6th to 10th Leaf)</h5>
             <p>Ear size determination period. Stress can reduce kernel rows and ear length.</p>
           </div>
         </div>
@@ -156,7 +151,7 @@ export class EducationalContent {
   private createSoilScienceContent(): string {
     return `
       <div class="tab-content" id="soil-content">
-        <h3>Soil Science for Corn Production 🏞️</h3>
+        <h3>Soil Science for Corn Production</h3>
         
         <div class="soil-types">
           <h4>Illinois Soil Types</h4>
@@ -164,9 +159,9 @@ export class EducationalContent {
           <div class="soil-type-card">
             <h5>Drummer Silty Clay Loam</h5>
             <div class="soil-properties">
-              <span class="property">🏆 Corn Suitability: 95/100</span>
-              <span class="property">💧 Drainage: Somewhat Poorly Drained</span>
-              <span class="property">🍃 Organic Matter: 4.2%</span>
+              <span class="property">Corn Suitability: 95/100</span>
+              <span class="property">Drainage: Somewhat Poorly Drained</span>
+              <span class="property">Organic Matter: 4.2%</span>
             </div>
             <p>Illinois' premier corn soil. Dark, rich, and fertile. Found in McLean County and other top producing areas.</p>
           </div>
@@ -174,9 +169,9 @@ export class EducationalContent {
           <div class="soil-type-card">
             <h5>Flanagan Silt Loam</h5>
             <div class="soil-properties">
-              <span class="property">🏆 Corn Suitability: 92/100</span>
-              <span class="property">💧 Drainage: Well Drained</span>
-              <span class="property">🍃 Organic Matter: 3.8%</span>
+              <span class="property">Corn Suitability: 92/100</span>
+              <span class="property">Drainage: Well Drained</span>
+              <span class="property">Organic Matter: 3.8%</span>
             </div>
             <p>Excellent corn soil with good drainage. Common in east-central Illinois.</p>
           </div>
@@ -187,32 +182,32 @@ export class EducationalContent {
           
           <div class="factor-grid">
             <div class="factor-card">
-              <h5>🌡️ Soil Temperature</h5>
+              <h5>Soil Temperature</h5>
               <p>Corn germinates best when soil temperature is consistently above 50°F at 2-inch depth. Cold soils delay emergence and increase disease risk.</p>
             </div>
 
             <div class="factor-card">
-              <h5>💧 Soil Moisture</h5>
+              <h5>Soil Moisture</h5>
               <p>Adequate moisture is critical for germination and early growth. Overly wet soils can cause compaction and poor root development.</p>
             </div>
 
             <div class="factor-card">
-              <h5>🧪 pH Level</h5>
+              <h5>pH Level</h5>
               <p>Optimal pH range: 6.0-6.8. Low pH reduces nutrient availability, while high pH can cause iron deficiency.</p>
             </div>
 
             <div class="factor-card">
-              <h5>🍃 Organic Matter</h5>
+              <h5>Organic Matter</h5>
               <p>Higher organic matter improves water holding capacity, nutrient retention, and soil structure. Illinois soils average 3-5%.</p>
             </div>
 
             <div class="factor-card">
-              <h5>🏗️ Soil Structure</h5>
+              <h5>Soil Structure</h5>
               <p>Good soil structure allows root penetration and water infiltration. Compaction can reduce yields significantly.</p>
             </div>
 
             <div class="factor-card">
-              <h5>💨 Drainage</h5>
+              <h5>Drainage</h5>
               <p>Proper drainage prevents waterlogging while maintaining adequate moisture. Tile drainage is common in Illinois.</p>
             </div>
           </div>
@@ -242,26 +237,26 @@ export class EducationalContent {
   private createClimateContent(): string {
     return `
       <div class="tab-content" id="climate-content">
-        <h3>Climate Factors 🌤️</h3>
+        <h3>Climate Factors</h3>
         
         <div class="climate-overview">
           <h4>Illinois Climate Zones</h4>
           <div class="zone-grid">
             <div class="zone-card">
               <h5>Northern Illinois (Zone 5a-5b)</h5>
-              <p><strong>GDD:</strong> 2,800-3,000</p>
+              <p><strong>Growing Degree Days:</strong> 2,800-3,000</p>
               <p><strong>Frost-Free Days:</strong> 160-170</p>
               <p>Cooler temperatures, shorter growing season. Requires earlier maturing corn varieties.</p>
             </div>
             <div class="zone-card">
               <h5>Central Illinois (Zone 5b-6a)</h5>
-              <p><strong>GDD:</strong> 3,000-3,200</p>
+              <p><strong>Growing Degree Days:</strong> 3,000-3,200</p>
               <p><strong>Frost-Free Days:</strong> 170-180</p>
               <p>Optimal corn growing conditions. Highest yields in the state.</p>
             </div>
             <div class="zone-card">
               <h5>Southern Illinois (Zone 6a-6b)</h5>
-              <p><strong>GDD:</strong> 3,200-3,400</p>
+              <p><strong>Growing Degree Days:</strong> 3,200-3,400</p>
               <p><strong>Frost-Free Days:</strong> 180-190</p>
               <p>Warmer temperatures, longer season. Heat stress can be a concern.</p>
             </div>
@@ -272,7 +267,7 @@ export class EducationalContent {
           <h4>Critical Weather Factors</h4>
           
           <div class="weather-impact">
-            <h5>☀️ Temperature</h5>
+            <h5>Temperature</h5>
             <ul>
               <li><strong>Optimal Growing Range:</strong> 77-91°F (25-33°C)</li>
               <li><strong>Heat Stress:</strong> Above 95°F during pollination can reduce kernel set</li>
@@ -281,7 +276,7 @@ export class EducationalContent {
           </div>
 
           <div class="weather-impact">
-            <h5>💧 Precipitation</h5>
+            <h5>Precipitation</h5>
             <ul>
               <li><strong>Annual Needs:</strong> 20-30 inches during growing season</li>
               <li><strong>Critical Periods:</strong> VT to R2 needs 1-1.5 inches per week</li>
@@ -290,7 +285,7 @@ export class EducationalContent {
           </div>
 
           <div class="weather-impact">
-            <h5>🌬️ Wind</h5>
+            <h5>Wind</h5>
             <ul>
               <li><strong>Pollination:</strong> Light winds aid pollen dispersal</li>
               <li><strong>Strong Winds:</strong> Can cause root lodging and stalk breakage</li>
@@ -299,7 +294,7 @@ export class EducationalContent {
           </div>
 
           <div class="weather-impact">
-            <h5>☁️ Solar Radiation</h5>
+            <h5>Solar Radiation</h5>
             <ul>
               <li><strong>Photosynthesis:</strong> More sunlight = more grain fill</li>
               <li><strong>Cloudy Weather:</strong> During grain fill reduces yield</li>
@@ -309,7 +304,7 @@ export class EducationalContent {
         </div>
 
         <div class="drought-stress">
-          <h4>🔥 Drought Stress Impact</h4>
+          <h4>Drought Stress Impact</h4>
           <div class="stress-timeline">
             <div class="stress-period">
               <h5>Early Season (V6-V10)</h5>
@@ -335,7 +330,7 @@ export class EducationalContent {
   private createYieldFactorsContent(): string {
     return `
       <div class="tab-content" id="yield-content">
-        <h3>Yield Factors & Optimization 📈</h3>
+        <h3>Yield Factors & Optimization</h3>
         
         <div class="yield-equation">
           <h4>Corn Yield Components</h4>
@@ -346,16 +341,16 @@ export class EducationalContent {
 
         <div class="yield-factors-grid">
           <div class="yield-factor">
-            <h5>🌱 Plant Population</h5>
+            <h5>Plant Population</h5>
             <div class="factor-details">
-              <p><strong>Optimal:</strong> 32,000-36,000 plants/acre</p>
+              <p><strong>Optimal Range:</strong> 32,000-36,000 plants/acre</p>
               <p><strong>Row Spacing:</strong> 30-inch rows standard</p>
               <p><strong>Impact:</strong> Too low = fewer plants, too high = competition</p>
             </div>
           </div>
 
           <div class="yield-factor">
-            <h5>🌽 Ear Number</h5>
+            <h5>Ear Development</h5>
             <div class="factor-details">
               <p><strong>Typical:</strong> 1.0-1.05 ears per plant</p>
               <p><strong>Barren Plants:</strong> Stress can prevent ear development</p>
@@ -364,7 +359,7 @@ export class EducationalContent {
           </div>
 
           <div class="yield-factor">
-            <h5>🔢 Kernels per Ear</h5>
+            <h5>Kernels per Ear</h5>
             <div class="factor-details">
               <p><strong>Range:</strong> 600-1,000 kernels per ear</p>
               <p><strong>Determined:</strong> V6 to V18 growth stages</p>
@@ -373,7 +368,7 @@ export class EducationalContent {
           </div>
 
           <div class="yield-factor">
-            <h5>⚖️ Kernel Weight</h5>
+            <h5>Kernel Weight</h5>
             <div class="factor-details">
               <p><strong>Range:</strong> 250-400 mg per kernel</p>
               <p><strong>Determined:</strong> During grain fill (R2-R6)</p>
@@ -386,16 +381,16 @@ export class EducationalContent {
           <h4>Best Management Practices</h4>
           
           <div class="practice-category">
-            <h5>🌾 Variety Selection</h5>
+            <h5>Variety Selection</h5>
             <ul>
-              <li>Choose varieties adapted to your area's GDD</li>
+              <li>Choose varieties adapted to your area's Growing Degree Days</li>
               <li>Consider disease resistance packages</li>
-              <li>Match maturity to field and market needs</li>
+              <li>Match maturity to field conditions and market needs</li>
             </ul>
           </div>
 
           <div class="practice-category">
-            <h5>🚜 Planting</h5>
+            <h5>Planting Management</h5>
             <ul>
               <li>Plant when soil temperature is consistently above 50°F</li>
               <li>Optimal planting date: May 1-15 in Illinois</li>
@@ -404,29 +399,29 @@ export class EducationalContent {
           </div>
 
           <div class="practice-category">
-            <h5>🧪 Nutrition</h5>
+            <h5>Nutrient Management</h5>
             <ul>
               <li>Soil test to determine nutrient needs</li>
               <li>Split nitrogen applications for efficiency</li>
-              <li>Consider variable rate application</li>
+              <li>Consider variable rate application technology</li>
             </ul>
           </div>
 
           <div class="practice-category">
-            <h5>🐛 Pest Management</h5>
+            <h5>Pest Management</h5>
             <ul>
               <li>Scout regularly for insects and diseases</li>
               <li>Use economic thresholds for treatment decisions</li>
-              <li>Integrate multiple control methods</li>
+              <li>Integrate multiple control methods (IPM)</li>
             </ul>
           </div>
         </div>
 
         <div class="economic-analysis">
-          <h4>💰 Economic Considerations</h4>
+          <h4>Economic Considerations</h4>
           <div class="cost-breakdown">
             <div class="cost-item">
-              <span>Seed</span>
+              <span>Seed Costs</span>
               <span>$120-150/acre</span>
             </div>
             <div class="cost-item">
@@ -434,7 +429,7 @@ export class EducationalContent {
               <span>$200-300/acre</span>
             </div>
             <div class="cost-item">
-              <span>Chemicals</span>
+              <span>Pesticides</span>
               <span>$80-120/acre</span>
             </div>
             <div class="cost-item">

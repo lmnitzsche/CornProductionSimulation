@@ -574,10 +574,10 @@ var b=Object.defineProperty;var C=(r,e,t)=>e in r?b(r,e,{enumerable:!0,configura
                 <div class="form-group">
                   <label for="soil-moisture">Soil Moisture Level:</label>
                   <select id="soil-moisture">
-                    <option value="0.4">Drought Stress</option>
-                    <option value="0.6">Dry Conditions</option>
-                    <option value="0.8" selected>Adequate Moisture</option>
-                    <option value="1.0">Optimal Moisture</option>
+                    <option value="drought">Drought Stress</option>
+                    <option value="dry">Dry Conditions</option>
+                    <option value="adequate">Adequate Moisture</option>
+                    <option value="optimal" selected>Optimal Moisture</option>
                   </select>
                 </div>
                 <div class="form-group">

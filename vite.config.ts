@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  base: '/CornProductionSimulation/',
+  base: '/corn-production-simulation/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
